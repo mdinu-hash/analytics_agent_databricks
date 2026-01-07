@@ -12,7 +12,7 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import MemorySaver
 
 # Import utilities
-from utilities import query_genie as query_genie_api, objects_documentation
+from utilities import query_genie as query_genie_api
 
 # Genie space ID
 GENIE_SPACE_ID = "your-genie-space-id"  
@@ -30,6 +30,7 @@ class State(TypedDict):
     llm_answer: BaseMessage  # AI response
     scenario: str  # A (data query), B (pleasantries), C (data unavailable), D (ambiguous)
     generate_answer_details: dict  # Contains: agent_questions, key_assumptions, ambiguity_explanation
+    objects_documentation: str  # Database schema documentation
     intermediate_steps: list[AgentAction]  # Execution tracking
 
 # classes for agent's structured output
@@ -141,7 +142,7 @@ Suggest max 2 smart next steps for the user to explore further, chosen from the 
     result = chain.invoke({
         'messages_log': extract_msg_content_from_history(state['messages_log']),
         'question': state['current_question'],
-        'objects_documentation': objects_documentation
+        'objects_documentation': state['objects_documentation']
     })
     return result['agent_questions']
 
@@ -177,7 +178,7 @@ def orchestrator(state: State):
         'messages_log': extract_msg_content_from_history(state['messages_log']),
         'question': state['current_question'],
         'insights': format_sql_query_results_for_prompt(state['current_sql_queries']),
-        'objects_documentation': objects_documentation
+        'objects_documentation': state['objects_documentation']
     })
 
     if result['next_step'] == 'Continue':
@@ -251,7 +252,7 @@ def clarification_check(state: State):
     result = chain.invoke({
         'messages_log': extract_msg_content_from_history(state['messages_log']),
         'question': state['current_question'],
-        'objects_documentation': objects_documentation
+        'objects_documentation': state['objects_documentation']
     })
 
     # Determine next step based on result
@@ -316,7 +317,7 @@ def clarification(state: State):
     result = chain.invoke({
         'messages_log': extract_msg_content_from_history(state['messages_log']),
         'question': state['current_question'],
-        'objects_documentation': objects_documentation
+        'objects_documentation': state['objects_documentation']
     })
 
     # Update state (scenario D already set by clarification_check)
