@@ -1,7 +1,7 @@
 import mlflow
 from uuid import uuid4
 from mlflow.pyfunc import ResponsesAgent
-from mlflow.types.responses import ResponsesAgentRequest, ResponsesAgentResponse
+from mlflow.types.responses import ResponsesAgentResponse
 from langchain_core.messages import AIMessage
 
 class copilot_agent(ResponsesAgent):
