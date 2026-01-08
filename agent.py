@@ -12,13 +12,7 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import MemorySaver
 
 # Import utilities
-from utilities import query_genie as query_genie_api
-
-# Genie space ID
-GENIE_SPACE_ID = "your-genie-space-id"  
-
-# Initialize LLM (Databricks Foundation Model)
-llm = ChatDatabricks(endpoint="databricks-claude-sonnet-4", temperature=0)
+from utilities import query_genie as query_genie_api, GENIE_SPACE_ID, llm
 
 # LangGraph state
 
@@ -137,7 +131,7 @@ Suggest max 2 smart next steps for the user to explore further, chosen from the 
     Example: Instead of analyzing for all companies, suggest filtering for a single company and give a few suggestions.
     """
 
-    prompt = ChatPromptTemplate.from_messages([('system', sys_prompt)])
+    prompt = ChatPromptTemplate.from_messages([('user', sys_prompt)])
     chain = prompt | llm.with_structured_output(AgentQuestions)
     result = chain.invoke({
         'messages_log': extract_msg_content_from_history(state['messages_log']),

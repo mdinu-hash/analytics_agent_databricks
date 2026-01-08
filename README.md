@@ -47,4 +47,5 @@ Conclusion: This agent scored the highest score amongst x,y,z proved it's the mo
 ## how to use it
 1. Clone this repository into your local environment
 2. Replace the genieID with your genie space
-3. Use the file XX to deploy the agent as a new foundational model
+3. Before deployment: test the agent using the notebook "test_agent".
+3. Run each cell from notebook "deployment" to deploy the agent as a new foundational model

@@ -12,11 +12,15 @@ from databricks.sdk import WorkspaceClient
 import mlflow
 import mlflow.langchain
 from database_schema import database_schema, table_relationships
+from databricks_langchain import ChatDatabricks
 
+# Configuration
 
-# ============================================================================
-# OBJECTS DOCUMENTATION (SCHEMA)
-# ============================================================================
+GENIE_SPACE_ID = "your-genie-space-id"  # Genie space ID
+
+llm = ChatDatabricks(endpoint="databricks-claude-sonnet-4", temperature=0) # Databricks Foundation Model
+
+# objects documentation (database schema)
 
 def create_objects_documentation(database_schema, table_relationships):
     """
