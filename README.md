@@ -167,20 +167,3 @@ This enables to explain to governance and compliance why the agent gave a certai
 This framework makes analytics agents decision-grade systems.
 
 It is designed for environments where incorrect answers have financial and regulatory consequences.
-
-# How to use this solution accelerator in your environment
-1. Clone this repository into your local environment.
-
-2. Replace the genieID with your genie space.
-
-3. Update the database_schema file with your table and column documentation.
-
-Note: The database_schema file includes available tables and columns from the genie space.
-In the near term, these will be available to be fetched automatically from the genie space,
-but since currently the Genie API's `include_serialized_space` parameter is in beta
-(https://docs.databricks.com/api/workspace/genie/getspace)
-I couldn't use it and made the database_schema.py file as a work-around for demo reasons.
-
-4. Before deployment: test the agent using the notebook "test_agent".
-
-5. Run each cell from notebook "deployment" to deploy the agent as a new foundational model.
