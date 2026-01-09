@@ -1,11 +1,3 @@
-feedbacks_db.db
 .env
 .venv/
-__pycache__/db_agent_v1.cpython-313.pyc
-__pycache__/db_agent_v1.cpython-39.pyc
-__pycache__/db_agent_v1.cpython-39.pyc
-__pycache__/db_agent_v1.cpython-39.pyc
 *.pyc
-UI Specs.pdf
-notebooks/test_isolation.ipynb
-IMPLEMENTATION_REQUIREMENTS_TERMINOLOGY_DISAMBIGUATION.md
